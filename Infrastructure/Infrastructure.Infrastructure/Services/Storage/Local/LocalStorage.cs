@@ -30,7 +30,7 @@ public class LocalStorage : Storage, ILocalStorage
         }
     }
 
-    public async Task DeleteAsync(string path, string fileName) => await Task.Run(() => File.Delete(Path.Combine(path, fileName)));
+    public async Task DeleteAsync(string path, string fileName) => await Task.Run(() => File.Delete(Path.Combine(_webHostEnvironment.WebRootPath, path, fileName)));
 
     public List<string> GetFiles(string path)
     {
