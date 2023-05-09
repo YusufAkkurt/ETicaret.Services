@@ -4,6 +4,7 @@ using Core.Application.Repositories.Files.InvoiceFiles;
 using Core.Application.Repositories.Files.ProductImageFiles;
 using Core.Application.Repositories.Orders;
 using Core.Application.Repositories.Products;
+using Core.Domain.Entities.Identities;
 using Infrastructure.Persistance.Contexts;
 using Infrastructure.Persistance.Repositories.Customers;
 using Infrastructure.Persistance.Repositories.Files._Bases;
@@ -21,6 +22,14 @@ public static class ServiceRegistration
     public static void AddPersistanceServices(this IServiceCollection services)
     {
         services.AddDbContext<ETicaretDbContext>(options => options.UseNpgsql(Configuration.PostgreSQLConnectionString));
+        services.AddIdentity<AppUser, AppRole>(options =>
+        {
+            options.Password.RequiredLength = 6;
+            options.Password.RequireNonAlphanumeric = false;
+            options.Password.RequireDigit = false;
+            options.Password.RequireUppercase = false;
+            options.Password.RequireLowercase = false;
+        }).AddEntityFrameworkStores<ETicaretDbContext>();
 
         services.AddScoped<ICustomerReadRepository, CustomerReadRepository>();
         services.AddScoped<ICustomerWriteRepository, CustomerWriteRepository>();

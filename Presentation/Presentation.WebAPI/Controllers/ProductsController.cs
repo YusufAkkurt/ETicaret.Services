@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using Core.Application.Abstractions.Storage;
-using Core.Application.Features.Commands.ProductImageFiles.RemoveProductImage;
+﻿using Core.Application.Features.Commands.ProductImageFiles.RemoveProductImage;
 using Core.Application.Features.Commands.ProductImageFiles.UploadProductImage;
 using Core.Application.Features.Commands.Products.CreateProduct;
 using Core.Application.Features.Commands.Products.RemoveProduct;
@@ -8,38 +6,18 @@ using Core.Application.Features.Commands.Products.UpdateProduct;
 using Core.Application.Features.Queries.ProductImageFiles.GetProductImages;
 using Core.Application.Features.Queries.Products.GetAllProduct;
 using Core.Application.Features.Queries.Products.GetByIdProduct;
-using Core.Application.Repositories.Files.ProductImageFiles;
-using Core.Application.Repositories.Products;
-using Core.Application.ViewModels.Products;
-using Core.Domain.Entities;
-using Core.Domain.Entities.Files;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Net;
 
 namespace Presentation.WebAPI.Controllers;
-[Route("api/[controller]")]
-[ApiController]
+
+[Route("api/[controller]"), ApiController]
 public class ProductsController : ControllerBase
 {
-    private readonly IProductReadRepository _productReadRepository;
-    private readonly IProductWriteRepository _productWriteRepository;
-    private readonly IProductImageFileReadRepository _productImageFileReadRepository;
-    private readonly IProductImageFileWriteRepository _productImageFileWriteRepository;
-    private readonly IStorageService _storageService;
-    private readonly IConfiguration _configuration;
-
     private readonly IMediator _mediator;
 
-    public ProductsController(IProductReadRepository productReadRepository, IProductWriteRepository productWriteRepository, IProductImageFileReadRepository productImageFileReadRepository, IProductImageFileWriteRepository productImageFileWriteRepository, IStorageService storageService, IConfiguration configuration, IMediator mediator)
+    public ProductsController(IMediator mediator)
     {
-        _productReadRepository = productReadRepository;
-        _productWriteRepository = productWriteRepository;
-        _productImageFileReadRepository = productImageFileReadRepository;
-        _productImageFileWriteRepository = productImageFileWriteRepository;
-        _storageService = storageService;
-        _configuration = configuration;
         _mediator = mediator;
     }
 

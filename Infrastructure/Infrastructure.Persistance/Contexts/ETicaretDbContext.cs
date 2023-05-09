@@ -1,11 +1,13 @@
 ﻿using Core.Domain.Entities;
 using Core.Domain.Entities.Common;
 using Core.Domain.Entities.Files;
+using Core.Domain.Entities.Identities;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistance.Contexts;
 
-public class ETicaretDbContext : DbContext
+public class ETicaretDbContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<Order> Orders { get; set; }
