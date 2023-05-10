@@ -6,12 +6,13 @@ using Core.Application.Features.Commands.Products.UpdateProduct;
 using Core.Application.Features.Queries.ProductImageFiles.GetProductImages;
 using Core.Application.Features.Queries.Products.GetAllProduct;
 using Core.Application.Features.Queries.Products.GetByIdProduct;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
 namespace Presentation.WebAPI.Controllers;
 
-[Route("api/[controller]"), ApiController]
+[Route("api/[controller]"), ApiController, Authorize(AuthenticationSchemes = "Admin")]
 public class ProductsController : ControllerBase
 {
     private readonly IMediator _mediator;
